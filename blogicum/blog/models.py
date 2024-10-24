@@ -38,7 +38,7 @@ class Category(PublishDateModel):
 
 
 class Location(PublishDateModel):
-    name = models.CharField(max_length=256, verbose_name='Название места')
+    name = models.CharField(max_length=LENGTH_CHAR, verbose_name='Название места')
 
     class Meta:
         verbose_name = 'местоположение'
