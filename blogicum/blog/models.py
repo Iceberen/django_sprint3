@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from .constants import LENGTH_CHAR
+
 
 User = get_user_model()
 
 
-class BaseModel(models.Model):
+class PublishDate(models.Model):
     is_published = models.BooleanField(
         default=True,
         verbose_name='Опубликовано',
@@ -18,8 +20,8 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class Category(BaseModel):
-    title = models.CharField(max_length=256, verbose_name='Заголовок')
+class Category(PublishDate):
+    title = models.CharField(max_length=LENGTH_CHAR, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
     slug = models.SlugField(
         unique=True,
@@ -35,7 +37,7 @@ class Category(BaseModel):
         return self.title
 
 
-class Location(BaseModel):
+class Location(PublishDate):
     name = models.CharField(max_length=256, verbose_name='Название места')
 
     class Meta:
@@ -46,7 +48,7 @@ class Location(BaseModel):
         return self.name
 
 
-class Post(BaseModel):
+class Post(PublishDate):
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     pub_date = models.DateTimeField(
