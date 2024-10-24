@@ -38,9 +38,7 @@ def category_posts(request, category_slug):
         is_published=True
     )
     posts_list = category.posts.filter(
-        category__slug=category_slug,
         is_published=True,
-        category__is_published=True,
         pub_date__date__lt=datetime.now()
     )
     context = {'category': category, 'post_list': posts_list}

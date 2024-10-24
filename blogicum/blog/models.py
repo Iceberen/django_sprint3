@@ -7,7 +7,7 @@ from .constants import LENGTH_CHAR
 User = get_user_model()
 
 
-class PublishDate(models.Model):
+class PublishDateModel(models.Model):
     is_published = models.BooleanField(
         default=True,
         verbose_name='Опубликовано',
@@ -20,7 +20,7 @@ class PublishDate(models.Model):
         abstract = True
 
 
-class Category(PublishDate):
+class Category(PublishDateModel):
     title = models.CharField(max_length=LENGTH_CHAR, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
     slug = models.SlugField(
@@ -37,7 +37,7 @@ class Category(PublishDate):
         return self.title
 
 
-class Location(PublishDate):
+class Location(PublishDateModel):
     name = models.CharField(max_length=256, verbose_name='Название места')
 
     class Meta:
@@ -48,8 +48,8 @@ class Location(PublishDate):
         return self.name
 
 
-class Post(PublishDate):
-    title = models.CharField(max_length=256, verbose_name='Заголовок')
+class Post(PublishDateModel):
+    title = models.CharField(max_length=LENGTH_CHAR, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     pub_date = models.DateTimeField(
         verbose_name='Дата и время публикации',
