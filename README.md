@@ -49,7 +49,7 @@
     ```
     pip install -r requirements.txt
 
-4. Выполните миграции и запустите сервер::
+4. Выполните миграции и запустите сервер:
     ```
     python3 manage.py migrate
     python3 manage.py runserver     # для Linux/macOS
